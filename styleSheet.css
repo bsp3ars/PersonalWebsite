@@ -1,12 +1,19 @@
 h1{
-	color:white
+	color:red;
+	text-align:center;
 }
 h2{ 
-	color:#000080
+	color:red;
+	text-align:center;
 }
-h3{
-	color:#000080
+h5{
+	color:black;
+	text-align:center;
 }
 body {
-    background-color:#7B68EE
+    background-color:white;
+    text-align:center;
+}
+img {
+	vertical-align:text-top;
 }
