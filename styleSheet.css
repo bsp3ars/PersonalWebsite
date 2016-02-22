@@ -1,19 +1,51 @@
-h1{
-	color:red;
-	text-align:center;
-}
-h2{ 
-	color:red;
-	text-align:center;
-}
-h5{
-	color:black;
-	text-align:center;
+html	{
+	font-family: "Myriad Pro", Helvetica, Serif;
 }
 body {
     background-color:white;
     text-align:center;
+    font-family:
+}
+h1, h2	{
+	color:red;
+	background-color:white;
+	font-size:32px;
+	margin:10px;20px;20px;
+	padding:8px;
+	text-align:center;
+	border-style: dashed;
+	font-family: "Minion Pro", Georgia, Sans-Serif;
+}
+h5	{
+	color:black;
+	text-align:center;
+	font-size:14px;
 }
 img {
 	vertical-align:text-top;
+}
+a	{
+ 	color:black;
+ 	background-color:red;
+ 	border-color:black;
+	border-width:2px;
+	border-style:groove;
+	text-decoration: none;
+	padding: 5px;
+ }
+ nav	{
+ 	padding: 10px; 20px;
+ 	font-size: 20px;
+ }
+ p	{
+ 	margin:35px;
+ }
+.mailLink	{
+	border:none;
+	background:white;
+}
+a:hover	{
+	color:white;
+	background-color:black;
+	border-color:red;
 }
