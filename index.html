@@ -1,25 +1,71 @@
 <!DOCTYPE html>
-<!-- Brandon Spears, 3/7/16, Main Page 1.7-->
+<!-- Brandon Spears, 3/21/16, Main Page 1.8-->
 <html>
 	<head>
-		<title>Brandon Spears</title>
+		<title>Home Page</title>
 		<meta charset="UTF-8">
+		<link rel="shortcut icon" href="photos/smalllogo.png" type = "image/png">
 		<meta name="description" content="The home page for Brandon Spears, a web designer in the Game Programming
 		and Web Applications Class at the Miami Valley Career Technology Center.">
 		<meta name="keywords" content="MVCTC, GW, Miami Valley CTC, Web Applications, Game Programming,
 		Student Portfolio work of Brandon Spears">
 		<meta name="author" content="Brandon Spears">
 		<meta name="robots" content="index,follow"/>
-		<meta http-equiv="refresh" content="60">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="styleSheet.css"/>
+		<link rel="stylesheet" type="text/css" media="screen and (max-width: 720px)" href="mobileStyleSheet.css">
+		<link rel="stylesheet" type="text/css" media="screen and (min-width: 721px)" href="styleSheet.css"/>
+		<link rel="stylesheet" href="printstyles.css" type="text/css" media="print"/>
+
+		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAbh0et1DTsukm-vitn1lCD7kiMGXgubJo"></script>
+
+		<script>
+			function openNav() {
+				document.getElementById("mySidenav").style.width = "75%";
+			}
+
+			function closeNav() {
+				document.getElementById("mySidenav").style.width = "0";
+			}
+
+			var map;
+			//<-- This is now available to both event listeners and the initialize() function
+			function initialize() {
+				var mapOptions = {
+					center : new google.maps.LatLng(39.845507, -84.328824),
+					zoom : 16,
+					mapTypeId : google.maps.MapTypeId.ROADMAP
+				};
+				map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+			}
+
+
+			google.maps.event.addDomListener(window, 'load', initialize);
+			google.maps.event.addDomListener(window, "resize", function() {
+				var center = map.getCenter();
+				google.maps.event.trigger(map, "resize");
+				map.setCenter(center);
+				// FOUND AT http://stackoverflow.com/questions/18444161/google-maps-responsive-resize
+			});
+		</script>
 	</head>
 	<body >
-		<div id="container">
-			<a href="index.html" title="Home"><img src="photos/gLogo.png" alt="logo"></a>
+		<div class="container">
+			<span id="wrapimage"> <a href="index.html" title="Home"><img src="photos/gLogo.png" class="scaleimage" alt="logo"></a> </span>
 			<hr/>
 			<nav>
-				<ul>
+				<div id="mySidenav" class="sidenav">
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+					<a href="index.html" title="Home">Home</a>
+					<a href="aboutMe.html" title="About Me">About Me</a>
+					<a href="contact.html" title="Contact">Contact</a>
+					<a href="projectPage.html" title="Main Projects">Main Projects</a>
+					<a href="c++proj.html" title="C++ Projects">C++ Projects</a>
+					<a href="java.html" title="Java Projects">Java Projects</a>
+					<a href="bpa.html" title="BPA">BPA</a>
+					<a href="badges.html" title="Badges">Badges</a>
+					<a href="forum.html" title="Forum">Forum</a>
+				</div>
+				<ul class="fullNav">
 					<li>
 						<a href="index.html" title="Home" id="active">Home</a>
 					</li>
@@ -30,16 +76,13 @@
 						<a href="contact.html" title="Contact">Contact</a>
 					</li>
 
-					<li>
-						<a href="c++proj.html" title="C++ Projects">C++ Projects</a>
-					</li>
-					<li>
-						<a href="java.html" title="Java Projects">Java Projects</a>
-					</li>
-					<li>
-						<a href="projectPage.html" title="Other Projects">Other Projects</a>
-					</li>
-
+					<li class="dropdown">
+						<a href="#" title="Projects">Projects</a>
+						<div class="dropdownContent">
+							<a href="projectPage.html" title="Main Projects">Main Projects</a>
+							<a href="c++proj.html" title="C++ Projects">C++ Projects</a>
+							<a href="java.html" title="Java Projects">Java Projects</a>
+						</div>
 					<li>
 						<a href="bpa.html" title="BPA">BPA</a>
 					</li>
@@ -49,17 +92,27 @@
 					<li>
 						<a href="forum.html" title="Forum">Forum</a>
 					</li>
-					<li class="floatRight">
-						<a href="http://gw.mvctc.com/web/jportfolio.html" title="GW" target="_blank">GW</a>
-					</li>
-					<li class="floatRight">
-						<a href="https://github.com/bsp3ars" title="GitHub" target="_blank">GitHub</a>
-					</li>
-					<li class="floatRight">
-						<a href="https://www.facebook.com/brandon.spears.528" title="Facebook" target="_blank">Facebook</a>
+					<li class="dropdownRight">
+						<a href="#" title="Links">Links</a>
+						<div class="dropdownContent">
+							<a href="http://gw.mvctc.com/web/jportfolio.html" title="GW" target="_blank">GW</a>
+							<a href="https://github.com/bsp3ars" title="GitHub" target="_blank">GitHub</a>
+						</div>
 					</li>
 				</ul>
+				<div class="mobileButton" onclick="openNav()">
+					<div class="bar1">
+
+					</div>
+					<div class="bar2">
+
+					</div>
+					<div class="bar3">
+
+					</div>
+				</div>
 			</nav>
+
 			<article>
 				<h2>Welcome</h2>
 				<p>
@@ -92,20 +145,26 @@
 				</p>
 			</article>
 
-			<img src="photos/sstreet.jpg" usemap="#in76068" width="800" height="490" alt="click map"/>
-			<map id="in76068" name="in76068">
-
-				<area shape="rect" alt="Sesame Street" title="Sesame Street" coords="14,36,452,452"
-				href="http://www.sesamestreet.org/" target="_blank" />
-
-				<area shape="rect" alt="Bernie Sanders" title="Bernie Sanders" coords="467,52,794,450"
-				href="https://go.berniesanders.com/page/content/splash" target="_blank" />
-				<area shape="default"/>
-			</map>
-
+			<article>
+				<h2>Image Map</h2>
+				<div class="wrapimage">
+					<a href="examples/imagemap.html"> <img src="photos/sstreet.jpg" alt="Sesame Street" class="scaleimage"></a>
+				</div>
+				<p>
+					The image above is a link to an image map that allows for you to click on parts of itself and have it
+					link to other websites for you.
+				</p>
+			</article>
+			<article>
+				<h2 class="apiInfo">Google Map</h2>
+				<div id="googleMap"> </div>
+				<p class="apiInfo">
+					This API (Application Programming Interface) uses google maps to show the location of my current school.
+				</p>
+			</article>
 			<hr/>
 			<footer>
-				<h5>&copy; Brandon Spears - 3/16/2016 - <a href="mailto:bsp3ars@gmail.com" class="mailLink"
+				<h5>&copy; Brandon Spears - 3/21/2016 - <a href="mailto:bsp3ars@gmail.com" class="mailLink"
 				title="Gmail">bsp3ars@gmail.com</a> - All Rights Reserved </h5>
 			</footer>
 		</div>

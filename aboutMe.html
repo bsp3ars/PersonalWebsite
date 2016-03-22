@@ -1,25 +1,48 @@
 <!DOCTYPE html>
-<!-- Brandon Spears, 3/7/16, About Me Page 1.7-->
+<!-- Brandon Spears, 3/21/16, About Me Page 1.8-->
 <html>
 	<head>
-		<title>BS About Me</title>
+		<title>About Me</title>
 		<meta charset="UTF-8">
+		<link rel="shortcut icon" href="photos/smalllogo.png" type = "image/png">
 		<meta name="description" content="The about me page for Brandon Spears, a web designer in the Game
 		Programming and Web Applications Class at the Miami Valley Career Technology Center.">
 		<meta name="keywords" content="MVCTC, GW, Miami Valley CTC, Web Applications, Game Programming,
 		Student Portfolio work of Brandon Spears">
 		<meta name="author" content="Brandon Spears">
 		<meta name="robots" content="index,follow"/>
-		<meta http-equiv="refresh" content="60">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="styleSheet.css"/>
+		<link rel="stylesheet" type="text/css" media="screen and (max-width: 720px)" href="mobileStyleSheet.css">
+		<link rel="stylesheet" type="text/css" media="screen and (min-width: 721px)" href="styleSheet.css"/>
+
+		<script>
+			function openNav() {
+				document.getElementById("mySidenav").style.width = "75%";
+			}
+
+			function closeNav() {
+				document.getElementById("mySidenav").style.width = "0";
+			}
+		</script>
 	</head>
-	<body>
-		<div id="container">
-			<a href="index.html" title="Home"><img src="photos/gLogo.png" alt="logo"></a>
+	<body >
+		<div class="container">
+			<span id="wrapimage"> <a href="index.html" title="Home"><img src="photos/gLogo.png" class="scaleimage" alt="logo"></a> </span>
 			<hr/>
 			<nav>
-				<ul>
+				<div id="mySidenav" class="sidenav">
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+					<a href="index.html" title="Home">Home</a>
+					<a href="aboutMe.html" title="About Me">About Me</a>
+					<a href="contact.html" title="Contact">Contact</a>
+					<a href="projectPage.html" title="Main Projects">Main Projects</a>
+					<a href="c++proj.html" title="C++ Projects">C++ Projects</a>
+					<a href="java.html" title="Java Projects">Java Projects</a>
+					<a href="bpa.html" title="BPA">BPA</a>
+					<a href="badges.html" title="Badges">Badges</a>
+					<a href="forum.html" title="Forum">Forum</a>
+				</div>
+				<ul class="fullNav">
 					<li>
 						<a href="index.html" title="Home">Home</a>
 					</li>
@@ -30,16 +53,13 @@
 						<a href="contact.html" title="Contact">Contact</a>
 					</li>
 
-					<li>
-						<a href="c++proj.html" title="C++ Projects">C++ Projects</a>
-					</li>
-					<li>
-						<a href="java.html" title="Java Projects">Java Projects</a>
-					</li>
-					<li>
-						<a href="projectPage.html" title="Other Projects">Other Projects</a>
-					</li>
-
+					<li class="dropdown">
+						<a href="#" title="Projects">Projects</a>
+						<div class="dropdownContent">
+							<a href="projectPage.html" title="Main Projects">Main Projects</a>
+							<a href="c++proj.html" title="C++ Projects">C++ Projects</a>
+							<a href="java.html" title="Java Projects">Java Projects</a>
+						</div>
 					<li>
 						<a href="bpa.html" title="BPA">BPA</a>
 					</li>
@@ -49,19 +69,27 @@
 					<li>
 						<a href="forum.html" title="Forum">Forum</a>
 					</li>
-					<li class="floatRight">
-						<a href="http://gw.mvctc.com/web/jportfolio.html" title="GW" target="_blank">GW</a>
-					</li>
-					<li class="floatRight">
-						<a href="https://github.com/bsp3ars" title="GitHub" target="_blank">GitHub</a>
-					</li>
-					<li class="floatRight">
-						<a href="https://www.facebook.com/brandon.spears.528" title="Facebook" target="_blank">Facebook</a>
+					<li class="dropdownRight">
+						<a href="#" title="Links">Links</a>
+						<div class="dropdownContent">
+							<a href="http://gw.mvctc.com/web/jportfolio.html" title="GW" target="_blank">GW</a>
+							<a href="https://github.com/bsp3ars" title="GitHub" target="_blank">GitHub</a>
+						</div>
 					</li>
 				</ul>
+				<span class="mobileButton" onclick="openNav()"> <div class="bar1">
+
+					</div> <div class="bar2">
+
+					</div> <div class="bar3">
+
+					</div> </span>
 			</nav>
 			<article>
 				<img class="transition" src="photos/resized.png" alt="personal photo">
+				<p>
+					Hover or tap the image for a cool transformation.
+				</p>
 				<h2>About Me</h2>
 				<p>
 					My name is Brandon Spears, and I am currently 16 years old. I am currently a junior in the Game
@@ -91,17 +119,17 @@
 				</p>
 			</article>
 			<article>
-				<h2>Awards and Accomplishments</h2>
+				<h2>Achievements</h2>
 				<p>
 					I won Student of the Month (February 2016), as well as placed 4th Regionaly for C++ (BPA).
 					I am also proud of my perfect attendence at MVCTC, and the amount of time I have spent on this website (over 12 hours).
-					I also am currently in the most advenced classes possible: Calculus (Dual Credit), Physics, English 4(Dual Credit), Web
+					I also am currently in the most advenced classes possible: Calculus (Dual Credit), Physics, English 4 (Dual Credit), Web
 					Applications, and some classes at Sinclair Community College.
 				</p>
 			</article>
 
-			<div style="border:2px; border-color:black; border-style:dashed; margin:10px;20px;20px; padding: 8px;">
-				<img src="photos/wordle.png" alt="wordle">
+			<div class="wrapimage">
+				<img src="photos/wordle.png" class="scaleimage"alt="wordle">
 			</div>
 			<p>
 				This wordle (word cloud) roughly describes some of the characteristics of myself, some of the different
@@ -110,7 +138,7 @@
 			<hr/>
 			<footer>
 
-				<h5>&copy; Brandon Spears - 3/16/2016 - <a href="mailto:bsp3ars@gmail.com" class="mailLink"
+				<h5>&copy; Brandon Spears - 3/21/2016 - <a href="mailto:bsp3ars@gmail.com" class="mailLink"
 				title="Gmail">bsp3ars@gmail.com</a> - All Rights Reserved </h5>
 			</footer>
 		</div>
