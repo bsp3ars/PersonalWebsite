@@ -10,4 +10,5 @@ The personal website of bsp3ars (Brandon Spears)
 <dd>Version 1.5 (3/3/16)- Updated styleSheet.css, as well as added other pages to the website. Added Project Page as well as an About Me page, and a Under Construction page for unfinished links. Added meta tags for SEO optimization, as well as updated the nav bar for correct wrapping. Other minor improvements as well.</dd>
 <dd>Version 1.6 (3/7/16)- Added a dropdown menu for all projects, as well as added additional pages required for website.</dd>
 <dd>Version 1.7 (3/16/16)- Updated color scheme, as well as adjusted for divs, added a image wrapper, an animation, added links for multiple websites, and removed the dropdown menu.</dd>
+<dd>Version 1.8 (3/21/16)- Fixed issue with same background as another student, re-added dropdown menu for desktop css, added mobile css that has a side-nav that uses javascript to appear and disappear, and overall improvements.</dd>
 </dl>
