@@ -11,4 +11,5 @@ The personal website of bsp3ars (Brandon Spears)
 <dd>Version 1.6 (3/7/16)- Added a dropdown menu for all projects, as well as added additional pages required for website.</dd>
 <dd>Version 1.7 (3/16/16)- Updated color scheme, as well as adjusted for divs, added a image wrapper, an animation, added links for multiple websites, and removed the dropdown menu.</dd>
 <dd>Version 1.8 (3/21/16)- Fixed issue with same background as another student, re-added dropdown menu for desktop css, added mobile css that has a side-nav that uses javascript to appear and disappear, and overall improvements.</dd>
+<dd>Version 2.0 (4/12/16)- Converted all HTML to PHP, created hit counter that displays in the footer, created a nav and footer that is autocreated by the server, and other small improvements.</dd>
 </dl>
