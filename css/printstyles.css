@@ -1,0 +1,36 @@
+/*Print Styles */
+/*Author: Brandon Spears */
+/*Date: 3/21/16 */
+
+/*hides elements */
+
+header, .fullNav	{
+	display:none;
+}
+
+@page	{
+	size: 8.5in 11in;
+	margin: 0.5in;
+}
+
+
+/*Formats page for prinitng */
+body	{
+	color:black;
+	background-color:white;
+	background-image: none;
+	font-size: 12pt;
+	font-family: "Times New Roman", Times, serif;
+	line-height: 120%;
+}
+
+/*Sets links to default colors */
+a {
+	text-decoration:underline;
+	color:blue;
+}
+
+/*Removes images from printout */
+img	{
+	display:none;
+}
