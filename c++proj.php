@@ -14,9 +14,7 @@
 <meta name="robots" content="index,follow" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
-	media="screen and (max-width: 720px)" href="css/mobileStyleSheet.css">
-<link rel="stylesheet" type="text/css"
-	media="screen and (min-width: 721px)" href="css/styleSheet.css" />
+	media="screen" href="css/styleSheet.css" />
 <link rel="stylesheet" href="css/printstyles.css" type="text/css"
 	media="print" />
 

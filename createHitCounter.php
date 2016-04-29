@@ -1,5 +1,5 @@
 <?php
-require ('connection_example.php');
+require ('connection.php');
 
 $query = 'create table hitcounter (hitCount INT NOT NULL AUTO_INCREMENT PRIMARY KEY) '; //holds sql
 

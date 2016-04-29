@@ -1,5 +1,5 @@
 <?php
-require ('connection_example.php');
+require ('connection.php');
 
 if (isset ( $_SESSION ['visited'] )) {
 	// DISPLAY HIT COUNTER ON PAGE
@@ -15,11 +15,11 @@ if (isset ( $_SESSION ['visited'] )) {
 } else {
 	
 	$_SESSION ['visited'] = 1; // record they have been to page
-	                        
+	                           
 	// CREATE A NEW HIT
 	$query = 'insert into hitcounter (hitCount) values (NULL)';
 	
-	if (!$dConnect->query ( $query )) {
+	if (! $dConnect->query ( $query )) {
 		echo '<h2>Error: Cannot create record(' . $dConnect->connect_errno . ') ' . $dConnect->connect_error . '</h2>';
 	} else {
 		// DISPLAY HIT COUNTER ON PAGE
@@ -31,7 +31,7 @@ if (isset ( $_SESSION ['visited'] )) {
 				
 				$nbrhits = $row ['hitCount'];
 				// write it out
-				echo '<h6> Visitor #: ' . $nbrhits . '</h6>';
+				echo '<p> Visitor #: ' . $nbrhits . '</p>';
 			} // close while
 			  // empty the record set
 			$result->free ();
@@ -39,7 +39,7 @@ if (isset ( $_SESSION ['visited'] )) {
 			// DELETE THE HIT
 			$query = 'delete from hitcounter where hitCount < ' . $nbrhits;
 			
-			if (!$dConnect->query ( $query )) {
+			if (! $dConnect->query ( $query )) {
 				echo '<h2>Error: Cannot delete record(' . $dConnect->connect_errno . ') ' . $dConnect->connect_error . '</h2>';
 			} // close delete if statement
 		} // close select if statement

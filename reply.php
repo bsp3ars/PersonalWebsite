@@ -13,10 +13,8 @@
 <meta name="author" content="Brandon Spears">
 <meta name="robots" content="index,follow" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css"
-	media="screen and (max-width: 720px)" href="css/mobileStyleSheet.css">
-<link rel="stylesheet" type="text/css"
-	media="screen and (min-width: 721px)" href="css/styleSheet.css" />
+<link rel="stylesheet" type="text/css" media="screen"
+	href="css/styleSheet.css" />
 <link rel="stylesheet" href="css/printstyles.css" type="text/css"
 	media="print" />
 
@@ -33,37 +31,82 @@
 <body>
 	<div class="container">
 			<?php
-			require ("inc/nav.php");
+			require ('inc/nav.php');
+			require ('connection.php');
 			?>
 			<article>
-			<h2>Reply Form</h2>
+			<h2>Post</h2>
 			<?php
 			
-			echo "
-		<form method='POST' action ='reply.php'>
-		<p>
-		<table class='centerTable'>
-		<tr><td>Text Field: </td><td><input type='text' name='textField' maxlength='500' required></td></tr>
-		</table>
-		<p>
-		<input type='submit' value='Post'>
-		<input type='reset' value='Reset'>
-		</p>
-		</form>";
-			
-			if (isset ( $_POST ['textField'] )) {
+			if (isset ( $_SESSION ['userID'] )) {
 				
-				$textField = htmlspecialchars ( $_POST ['textField'] );
+				$postID = htmlspecialchars ( $_GET ['postID'] );
 				
-				echo "<h2> Replies </h2>";
-				echo "<p>Text: " . $textField . "</p>";
-			}	
+				$sql = 'SELECT userID, title, textfield, date_format(time, "%m/%d/%Y at %l:%i %p") FROM posts WHERE postID = ' . $postID . ' and approval = "Y"';
+				if ($result = $dConnect->query ( $sql )) {
+					while ( $row = $result->fetch_assoc () ) {
+						echo "<div class='initialpost'>
+						<h2>" . $row ['title'] . "</h2>
+						<p>" . $row ['textfield'] . "</p>
+						<h6>Posted On: " . $row ['date_format(time, "%m/%d/%Y at %l:%i %p")'] . " <br>
+						Post By:";
+						$userID = $row ['userID'];
+						$userSQL = 'SELECT * FROM users WHERE userID = "' . $userID . '"';
+						$userresult = $dConnect->query ( $userSQL );
+						$userrow = $userresult->fetch_assoc ();
+						echo " " . $userrow ['fName'] . " " . $userrow ['lName'] . "
+						</h6></div>";
+					}
+				}
+				echo "<h2>Replies</h2>";
+				
+				$sql = 'SELECT replyID, userID, postID, textField, date_format(time, "%m/%d/%Y at %l:%i %p") FROM reply WHERE postID = ' . $postID . ' and approval = "Y" ORDER BY replyID ASC LIMIT 25';
+				if ($result = $dConnect->query ( $sql )) {
+					$count = 1;
+					while ( $row = $result->fetch_assoc () ) {
+						echo "<div class='post'>
+						<p>" . $count . ". " . $row ['textField'] . "</p>
+						<h6>Posted On: " . $row ['date_format(time, "%m/%d/%Y at %l:%i %p")'] . " <br>
+						Post By:";
+						$userID = $row ['userID'];
+						$userSQL = 'SELECT * FROM users WHERE userID = "' . $userID . '"';
+						$userresult = $dConnect->query ( $userSQL );
+						$userrow = $userresult->fetch_assoc ();
+						echo " " . $userrow ['fName'] . " " . $userrow ['lName'] . "
+						</h6></div>";
+						$count ++;
+					}
+				}
+				
+				if (isset ( $_POST ['content'] )) {
+					
+					$approval = "N";
+					$content = htmlspecialchars ( $_POST ['content'] );
+					
+					$query = 'INSERT INTO reply (userID, postID, textfield, approval) VALUES (?, ?, ?, ?)';
+					$insertCheck = $dConnect->prepare ( $query );
+					$insertCheck->bind_param ( 'iiss', $_SESSION ['userID'], $postID, $content, $approval );
+					
+					if ($insertCheck = $insertCheck->execute ()) {
+						header ( "Refresh: 2; url=reply.php?postID=" . $_GET ['postID'] . "" );
+						
+						echo "<p>Your reply was added, congratulations!  It must be verified before it can be viewed.";
+					} else {
+						echo "Failed to insert the thread. ERROR: " . mysqli_connect_error ();
+						require ('replyForm.php');
+					}
+				} else {
+					require ('replyForm.php');
+				}
+			} else {
+				echo "<p>Please log in to post to the discussion board</p>";
+			}
 			
 			?>
 		</article>
 		<?php
-			require ("inc/footer.php");
-			?>
+		require ("inc/footer.php");
+		?>
 		</div>
 </body>
 </html>

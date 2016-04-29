@@ -14,9 +14,7 @@
 <meta name="robots" content="index,follow" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
-	media="screen and (max-width: 720px)" href="css/mobileStyleSheet.css">
-<link rel="stylesheet" type="text/css"
-	media="screen and (min-width: 721px)" href="css/styleSheet.css" />
+	media="screen" href="css/styleSheet.css" />
 <link rel="stylesheet" href="css/printstyles.css" type="text/css"
 	media="print" />
 
@@ -36,9 +34,9 @@
 		require ("inc/nav.php");
 		?>
 		<article>
-			<h2>ERROR</h2>
-			<p>I am sorry but the current page is still being worked on. Please
-				come back at a later time and it might be here (no promises).</p>
+			<h2>Java</h2>
+			<p>I have not started learning Java yet, but will start learning it in the Fall of 2017. I will begin to post 
+			my important projects as soon as they are completed.</p>
 		</article>
 		<div class="wrapimage">
 			<img src="photos/gears.gif" class="scaleimage" alt="gears gif">

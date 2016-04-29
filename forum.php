@@ -1,4 +1,4 @@
-<!DOCTYPE html>	
+<!DOCTYPE html>
 <html>
 <head>
 <title>Forum</title>
@@ -14,9 +14,7 @@
 <meta name="robots" content="index,follow" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
-	media="screen and (max-width: 720px)" href="css/mobileStyleSheet.css">
-<link rel="stylesheet" type="text/css"
-	media="screen and (min-width: 721px)" href="css/styleSheet.css" />
+	media="screen" href="css/styleSheet.css" />
 <link rel="stylesheet" href="css/printstyles.css" type="text/css"
 	media="print" />
 
@@ -33,40 +31,65 @@
 <body>
 	<div class="container">
 			<?php
-			require ("inc/nav.php");
+			require ('inc/nav.php');
+			require ('connection.php');
 			?>
 			<article>
 			<h2>Discussion Forum</h2>
 			<?php
 			
-			echo "
-		<form method='POST' action ='forum.php'>
-		<table class='centerTable'>
-		<tr><td>Title: </td><td><input type='text' name='title' maxlength='35' required></td></tr>
-		<tr><td>Text Field: </td><td><input type='text' name='textField' maxlength='500' required></td></tr>
-		</table>
-		<p>
-		<input type='submit' value='Post'>
-		<input type='reset' value='Reset'>
-		</p>
-		</form>";
-			
-			if (isset ( $_POST ['textField'] )) {
+			if (isset ( $_SESSION ['userID'] )) {
 				
-				$title = htmlspecialchars ( $_POST ['title'] );
-				$textField = htmlspecialchars ( $_POST ['textField'] );
+				$sql = 'SELECT postID, userID, title, textfield, date_format(time, "%m/%d/%Y at %l:%i %p") FROM posts WHERE approval = "Y" ORDER BY postID ASC LIMIT 25';
 				
-				echo "<h2> Posts </h2>";
-				echo "<p> Title: " . $title . "<br>";
-				echo "Text: " . $textField . "<br>";
-				echo "<a href='reply.php' title='Reply'>Reply</a>";
+				if($result = $dConnect->query($sql))	{
+					while($row = $result->fetch_assoc())	{
+						echo "<div class='initialpost'>
+						<h2> ".$row['title']."</h2>
+						<p>".$row['textfield']." <br>
+						<a class= 'reply' href='reply.php?postID=".$row['postID']."' title='Reply'>Reply</a></p>
+						<h6>Posted On: ".$row['date_format(time, "%m/%d/%Y at %l:%i %p")']." <br>
+						Post By:";
+						$userID = $row['userID'];
+						$userSQL = 'SELECT * FROM users WHERE userID = "'.$userID.'"';
+						$userresult = $dConnect->query($userSQL);
+						$userrow = $userresult->fetch_assoc();
+						echo " ".$userrow['fName']." ".$userrow['lName'] ."
+								</h6></div>";
+					}
+				}
+				
+				
+				if (isset ( $_POST ['content'] )) {
+					
+					$approval = "N";
+					
+					$thread = htmlspecialchars ( $_POST ['thread'] );
+					$content = htmlspecialchars ( $_POST ['content'] );
+					
+					$query = 'INSERT INTO posts (userID, title, textfield, approval) VALUES (?, ?, ?, ?)';
+					$insertCheck = $dConnect->prepare ( $query );
+					$insertCheck->bind_param ( 'isss', $_SESSION ['userID'], $thread, $content, $approval );
+					
+					if ($insertCheck = $insertCheck->execute ()) {
+						header ( "Refresh: 2; url=forum.php" );
+						echo "<p>Your thread was added, congratulations!  It must be verified before it can be viewed.";
+					} else {
+						echo "Failed to insert the thread. ERROR: " . mysqli_connect_error ();
+						require ('dbForm.php');
+					}
+				} else {
+					require ('dbForm.php');
+				}
+			} else {
+				echo "<p>Please log in to post to the discussion board</p>";
 			}
 			
 			?>
 		</article>
 		<?php
-			require ("inc/footer.php");
-			?>
+		require ("inc/footer.php");
+		?>
 		</div>
 </body>
 </html>
